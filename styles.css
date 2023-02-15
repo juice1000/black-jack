@@ -4,11 +4,20 @@ html, body{
     height: 100%;
     background: linear-gradient(black, rgb(45, 45, 45));
     color: white;
-    padding-top: 50px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 
+}
+
+.custom-player {
+    height: 400px;
+    padding-top: 10%;
+}
+
+.custom-button {
+    width: 120px !important;
+    margin: 10 10 10 10;
 }

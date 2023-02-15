@@ -13,16 +13,54 @@
             <h4>Can you beat the computer?</h4>
         </div>
         <br />
-        <button id="butt" type="button" class="btn btn-outline-info btn-lg" (click)="">NEW GAME</button>
+        <button id="butt" type="button" class="btn btn-outline-info btn-lg">NEW GAME</button>
         <br /> <br />
 
 
         <div id='main' class="container" style="display:none">
+
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-transparent border-info custom-player">
+                        <h3>Dealer</h3>
+                        <br /> <br />
+                        <h5>initial card</h5>
+                        <h5>initial card2</h5>
+                        <br /> <br />
+                        <br /> <br />
+                        <h5 id="dealer"></h5>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card bg-transparent border-info custom-player">
+                        <h3>You</h3>
+                        <br /> <br />
+                        <h5>initial card</h5>
+                        <h5>initial card2</h5>
+                        <br /> <br />
+                        <br /> <br />
+                        <h5 id="player"></h5>
+                    </div>
+                </div>
+            </div>
             <div class="p-3 mb-2 bg-info text-white">
-                Okkk I'm a box
-            <h4 class="text-center">By Christopher</h4>
-            <h4>By Christopher</h4>
+                
+            <h4>INFO BOX</h4>
+            <p id="info"></p>
+            
 
             </div>
+            <button id="hit" type="button" class="btn btn-outline-info btn-lg custom-button" onclick="addCards()">Hit!</button> <!-- Add one more card to player -->
+            <button id="stand" type="button" class="btn btn-outline-info btn-lg custom-button" onclick="addCardsDealer()">Stand</button> <!-- dealer gets cards until game decided -->
+            <div id="rematch" style="display:none">
+                <button type="button" class="btn btn-outline-info btn-lg custom-button" onclick="window.location.reload()">Rematch?</button> <!-- Reload the DOM -->
+            </div>
+            <br /> <br />
+            <br /> 
+            <div>
+                *For simplification reasons we ommited card suits
+            </div>
         </div>
+
+
     </body>

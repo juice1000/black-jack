@@ -1,0 +1,16 @@
+{
+  "name": "black_jack",
+  "version": "1.0.0",
+  "source": "index.html",
+  "repository": "https://github.com/juice1000/black-jack.git",
+  "author": "juice1000 <julienlook@gmx.de>",
+  "license": "MIT",
+  "scripts": {
+    "run": "parcel index.html"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "parcel": "^2.8.3"
+  },
+  "dependencies": {}
+}

@@ -1,5 +1,8 @@
-
 console.log('test log - script running')
+
+  ////////////////////////////
+ ///// STATE VARIABLES //////
+////////////////////////////
 
 let cards = [
     {name: "Ace", value: 11},
@@ -29,17 +32,32 @@ let infoCards = {
 let dealerScore = 0;
 let playerScore = 0;
 
+
+  ////////////////////////////////////
+ ///// HELPER FUNCTION SECTION //////
+////////////////////////////////////
+
 // simplyfied because chances of one game having more than 4 times the same value are close to impossible
 function getRandomCard(max) {
     // source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
     return Math.floor(Math.random() * max);
 }
 
+function rematch_info() {
+    $('#rematch').show()
+    $('#info').text(infoCards.rematch)
+}
+
+  ///////////////////////////////////
+ ///// MAIN FUNCTION SECTION //////
+//////////////////////////////////
+
+// Adds Cards for the player and does conditional checks to determine the game state
 function addCards(){
     let newCard = cards[getRandomCard(12)]
     console.log("Adding Card: ", newCard.name)
     playerScore += newCard.value
-    console.log(playerScore)
+    $('#player_cards').append('<br />' + newCard.name)
 
     // if card value > 21: fail 
     if (playerScore > 21) {
@@ -58,19 +76,21 @@ function addCards(){
     $('#info').text(infoCards.continue)
 }
 
-function rematch_info() {
-    $('#rematch').show()
-    $('#info').text(infoCards.rematch)
-}
 
 function addCardsDealer(){
     $('#info').text(infoCards.switch)
     $('#hit').prop("disabled", true)
     //setTimeout(dealer_info, 2000);
-    // while card value not >= player's card value
+
+    //while card value not >= player's card value
     // if card value > 21: fail 
     // if Ace was last card and player failed, Ace becomes "1", value will be corrected
 }
+
+
+  //////////////////////////
+ ///// INITIAL STATE //////
+//////////////////////////
 
 $(document).ready(function() {
     $('#butt').click(function() {

@@ -50,6 +50,7 @@ function addCards(){
         else {
             $('#info').text(infoCards.failed);
             $('#hit').prop("disabled", true)
+            // source: https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
             setTimeout(rematch_info, 2000);
         }
     }

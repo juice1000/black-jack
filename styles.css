@@ -21,3 +21,7 @@ html, body{
     width: 120px !important;
     margin: 10 10 10 10;
 }
+
+p {
+    margin: 5px;
+}

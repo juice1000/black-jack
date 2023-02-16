@@ -52,7 +52,7 @@ function rematch_info() {
 
 function autoCardIncrementDealer(newCard) {    
     dealerScore += newCard.value
-    $('#dealer_cards').append('<br />' + newCard.name)
+    $('#dealer_cards').append('<p>' + newCard.name + '</p>')
     if (dealerScore > 21) {
         // however if Ace was last card and player failed, Ace becomes "1", value will be corrected
         if (newCard.name === "Ace" && dealerScore - 10 < 21){
@@ -65,7 +65,7 @@ function autoCardIncrementDealer(newCard) {
 function autoCardIncrementPlayer() {    
     newCard = cards[getRandomCard(12)]
     playerScore += newCard.value
-    $('#player_cards').append('<br />' + newCard.name)
+    $('#player_cards').append('<p>' + newCard.name + '</p>')
     if (playerScore === 21) {
             $('#info').text(infoCards.win);
             $('#hit').prop("disabled", true)
@@ -86,7 +86,7 @@ function addCards(){
     newCard = cards[getRandomCard(12)]
     console.log("Adding Card: ", newCard.name)
     playerScore += newCard.value
-    $('#player_cards').append('<br />' + newCard.name)
+    $('#player_cards').append('<p>' + newCard.name + '</p>')
 
     // if card value > 21: fail 
     if (playerScore > 21) {
@@ -117,9 +117,10 @@ function addCardsDealer(){
     $('#info').text(infoCards.switch)
     $('#hit').prop("disabled", true)
     $('#stand').prop("disabled", true)
-    
+    console.log($("#dealer_cards").children().last().remove())
     // We play the Soft 17 version of Black Jack
     while (dealerScore <= playerScore && dealerScore < 17){
+
         newCard = cards[getRandomCard(12)]
         autoCardIncrementDealer(newCard);
     }
@@ -153,8 +154,7 @@ $(document).ready(function() {
 
             newCard = cards[getRandomCard(12)]
             autoCardIncrementDealer(newCard)
-            newCard = cards[getRandomCard(12)]
-            autoCardIncrementDealer(newCard)
+            $('#dealer_cards').append('<p>' + "?" + '</p>')
 
             autoCardIncrementPlayer()
             autoCardIncrementPlayer()

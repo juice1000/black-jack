@@ -6,7 +6,7 @@
   "author": "juice1000 <julienlook@gmx.de>",
   "license": "MIT",
   "scripts": {
-    "run": "parcel index.html"
+    "debug": "parcel index.html"
   },
   "devDependencies": {
     "nodemon": "^2.0.20",

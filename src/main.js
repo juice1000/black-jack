@@ -55,7 +55,7 @@ function autoCardIncrementDealer(newCard) {
     $('#dealer_cards').append('<br />' + newCard.name)
     if (dealerScore > 21) {
         // however if Ace was last card and player failed, Ace becomes "1", value will be corrected
-        if (newCard.value === "Ace" && dealerScore - 10 < 21){
+        if (newCard.name === "Ace" && dealerScore - 10 < 21){
             dealerScore -= 10
         } 
         else if (dealerScore === 22) {
@@ -98,8 +98,7 @@ function addCards(){
     // if card value > 21: fail 
     if (playerScore > 21) {
         // however if Ace was last card and player failed, Ace becomes "1", value will be corrected
-        console.log(newCard.name === 'Ace', newCard.name)
-        if (newCard.value === "Ace" && playerScore - 10 < 21){
+        if (newCard.name === "Ace" && playerScore - 10 < 21){
             playerScore -= 10
             console.log('invoked the exception')
             $('#info').text(infoCards.continue)

@@ -119,7 +119,7 @@ function addCardsDealer(){
     $('#stand').prop("disabled", true)
     
     // We play the Soft 17 version of Black Jack
-    while (dealerScore < playerScore && dealerScore < 17){
+    while (dealerScore <= playerScore && dealerScore < 17){
         newCard = cards[getRandomCard(12)]
         autoCardIncrementDealer(newCard);
     }

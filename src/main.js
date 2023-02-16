@@ -32,6 +32,7 @@ let infoCards = {
 
 let dealerScore = 0;
 let playerScore = 0;
+let newCard = {}
 
 
   ////////////////////////////////////
@@ -49,7 +50,7 @@ function rematch_info() {
     $('#info').text(infoCards.rematch)
 }
 
-function autoCardIncrement(newCard) {    
+function autoCardIncrementDealer(newCard) {    
     dealerScore += newCard.value
     $('#dealer_cards').append('<br />' + newCard.name)
     if (dealerScore > 21) {
@@ -69,6 +70,19 @@ function autoCardIncrement(newCard) {
     $('#dealer_total').text(`Current Score: ` + dealerScore);
 }
 
+function autoCardIncrementPlayer() {    
+    newCard = cards[getRandomCard(12)]
+    playerScore += newCard.value
+    $('#player_cards').append('<br />' + newCard.name)
+    if (playerScore === 21) {
+            $('#info').text(infoCards.switch);
+            $('#hit').prop("disabled", true)
+            $('#stand').prop("disabled", true)
+    }
+    $('#player_total').text(`Current Score: ` + playerScore);
+}
+
+
 
   ///////////////////////////////////
  ///// MAIN FUNCTION SECTION //////
@@ -76,7 +90,7 @@ function autoCardIncrement(newCard) {
 
 // Adds Cards for the player and does conditional checks to determine the game state
 function addCards(){
-    let newCard = cards[getRandomCard(12)]
+    newCard = cards[getRandomCard(12)]
     console.log("Adding Card: ", newCard.name)
     playerScore += newCard.value
     $('#player_cards').append('<br />' + newCard.name)
@@ -84,12 +98,14 @@ function addCards(){
     // if card value > 21: fail 
     if (playerScore > 21) {
         // however if Ace was last card and player failed, Ace becomes "1", value will be corrected
-        console.log(newCard.name === 'Ace')
+        console.log(newCard.name === 'Ace', newCard.name)
         if (newCard.value === "Ace" && playerScore - 10 < 21){
             playerScore -= 10
             console.log('invoked the exception')
+            $('#info').text(infoCards.continue)
         }
         else {
+            console.log(infoCards.failed)
             $('#info').text(infoCards.failed);
             $('#hit').prop("disabled", true)
             $('#stand').prop("disabled", true)
@@ -97,8 +113,11 @@ function addCards(){
             setTimeout(rematch_info, 3000);
         }
     }
+    else {
+        $('#info').text(infoCards.continue)
+    }
     $('#player_total').text(`Current Score: ` + playerScore);
-    $('#info').text(infoCards.continue)
+
 }
 
 
@@ -106,13 +125,11 @@ function addCardsDealer(){
     $('#info').text(infoCards.switch)
     $('#hit').prop("disabled", true)
     $('#stand').prop("disabled", true)
-
-    let newCard = {}
     
     // We play the Soft 17 version of Black Jack
     while (dealerScore < playerScore && dealerScore < 17){
         newCard = cards[getRandomCard(12)]
-        autoCardIncrement(newCard);
+        autoCardIncrementDealer(newCard);
     }
 
     if (dealerScore === playerScore) {
@@ -139,6 +156,20 @@ $(document).ready(function() {
         $(this).hide("slow");
         $("#intro").hide("slow", function(){
             $("#main").show()
+
+            newCard = cards[getRandomCard(12)]
+            autoCardIncrementDealer(newCard)
+            newCard = cards[getRandomCard(12)]
+            autoCardIncrementDealer(newCard)
+
+            autoCardIncrementPlayer()
+            autoCardIncrementPlayer()
+
+            $("#player_total").fadeIn("slow")
+            $("#dealer_total").fadeIn("slow")
+            $("#player_cards").fadeIn("slow")
+            $("#dealer_cards").fadeIn("slow")
+
         });
     });
 

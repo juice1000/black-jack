@@ -167,6 +167,17 @@ $(document).ready(function() {
         });
     });
 
+    $('#hit').click(function() {
+        addCards()
+    })
+    $('#stand').click(function() {
+        addCardsDealer()
+    })
+
+    $('#rematch-button').click(function() {
+        location.reload()
+    })
+
     $('#dealer_total').text(`Current Score: ` + dealerScore);
     $('#player_total').text(`Current Score: ` + playerScore);
     $('#info').text(infoCards.start);

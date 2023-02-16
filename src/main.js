@@ -20,6 +20,13 @@ let cards = [
     {name: "King", value: 10},
 ]
 
+let suits = [
+    {name: "Spade", value: '\u2660'},
+    {name: "Clover", value: '\u2665'},
+    {name: "Heart", value: '\u2666'},
+    {name: "Diamond", value: '\u2663'},
+]
+
 let infoCards = {
     start: 'Choose "Hit" if you want to continue or "Stand" if you want to stop',
     continue: "Are you brave enough to continue?",
@@ -50,9 +57,9 @@ function rematch_info() {
     $('#info').text(infoCards.rematch)
 }
 
-function autoCardIncrementDealer(newCard) {    
+function autoCardIncrementDealer(newCard, newSuit) {    
     dealerScore += newCard.value
-    $('#dealer_cards').append('<p>' + newCard.name + '</p>')
+    $('#dealer_cards').append('<p>' + newSuit.value + ' ' + newCard.name + '</p>')
     if (dealerScore > 21) {
         // however if Ace was last card and player failed, Ace becomes "1", value will be corrected
         if (newCard.name === "Ace" && dealerScore - 10 < 21){
@@ -64,8 +71,9 @@ function autoCardIncrementDealer(newCard) {
 
 function autoCardIncrementPlayer() {    
     newCard = cards[getRandomCard(12)]
+    newSuit = suits[getRandomCard(4)]
     playerScore += newCard.value
-    $('#player_cards').append('<p>' + newCard.name + '</p>')
+    $('#player_cards').append('<p>' + newSuit.value + ' ' + newCard.name + '</p>')
     if (playerScore === 21) {
             $('#info').text(infoCards.win);
             $('#hit').prop("disabled", true)
@@ -84,9 +92,10 @@ function autoCardIncrementPlayer() {
 // Adds Cards for the player and does conditional checks to determine the game state
 function addCards(){
     newCard = cards[getRandomCard(12)]
+    newSuit = suits[getRandomCard(4)]
     console.log("Adding Card: ", newCard.name)
     playerScore += newCard.value
-    $('#player_cards').append('<p>' + newCard.name + '</p>')
+    $('#player_cards').append('<p>'+ newSuit.value + ' ' + newCard.name + '</p>')
 
     // if card value > 21: fail 
     if (playerScore > 21) {
@@ -122,7 +131,8 @@ function addCardsDealer(){
     while (dealerScore <= playerScore && dealerScore < 17){
 
         newCard = cards[getRandomCard(12)]
-        autoCardIncrementDealer(newCard);
+        newSuit = suits[getRandomCard(4)]
+        autoCardIncrementDealer(newCard, newSuit);
     }
 
     if (dealerScore === playerScore) {
@@ -153,7 +163,8 @@ $(document).ready(function() {
             $("#main").show()
 
             newCard = cards[getRandomCard(12)]
-            autoCardIncrementDealer(newCard)
+            newSuit = suits[getRandomCard(4)]
+            autoCardIncrementDealer(newCard, newSuit)
             $('#dealer_cards').append('<p>' + "?" + '</p>')
 
             autoCardIncrementPlayer()

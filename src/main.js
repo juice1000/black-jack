@@ -46,7 +46,7 @@ let newCard = {}
  ///// HELPER FUNCTION SECTION //////
 ////////////////////////////////////
 
-// simplyfied because chances of one game having more than 4 times the same value are close to impossible
+// simplyfied because chances of one game having the same value combination of number and suit more than once are very unlikely
 function getRandomCard(max) {
     // source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
     return Math.floor(Math.random() * max);
@@ -138,7 +138,7 @@ function addCardsDealer(){
     if (dealerScore === playerScore) {
         $('#info').text(infoCards.tie)
     }
-    else if (dealerScore > playerScore) {
+    else if (dealerScore > playerScore && dealerScore < 22) {
         $('#info').text(infoCards.failed)
     }
     else if (dealerScore === 22) {
@@ -184,11 +184,9 @@ $(document).ready(function() {
     $('#stand').click(function() {
         addCardsDealer()
     })
-
     $('#rematch-button').click(function() {
         location.reload()
     })
-
     $('#dealer_total').text(`Current Score: ` + dealerScore);
     $('#player_total').text(`Current Score: ` + playerScore);
     $('#info').text(infoCards.start);

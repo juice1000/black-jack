@@ -26,7 +26,7 @@ let infoCards = {
     switch: "Now it's the dealer's turn!",
     failed:  "You lost!",
     win: "YOU WIN!!!",
-    tie: "It's a tie, Nobody wins!",
+    tie: "It's a tie, nobody wins!",
     rematch: "Do you want a rematch?"
 }
 
@@ -57,15 +57,7 @@ function autoCardIncrementDealer(newCard) {
         // however if Ace was last card and player failed, Ace becomes "1", value will be corrected
         if (newCard.name === "Ace" && dealerScore - 10 < 21){
             dealerScore -= 10
-        } 
-        else if (dealerScore === 22) {
-            $('#info').text(infoCards.tie);
-        }
-        else {
-            $('#info').text(infoCards.win);
-            // source: https://developer.mozilla.org/en-US/docs/Web/API/setTimeout
-            setTimeout(rematch_info, 2000);
-        }
+        }  
     }
     $('#dealer_total').text(`Current Score: ` + dealerScore);
 }
@@ -137,10 +129,12 @@ function addCardsDealer(){
     else if (dealerScore > playerScore) {
         $('#info').text(infoCards.failed)
     }
-    else if (dealerScore < playerScore) {
-        $('#info').text(infoCards.win)
+    else if (dealerScore === 22) {
+        $('#info').text(infoCards.tie);
     }
-
+    else {
+        $('#info').text(infoCards.win);
+    }
     setTimeout(rematch_info, 3000);
 }
 

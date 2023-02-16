@@ -67,9 +67,10 @@ function autoCardIncrementPlayer() {
     playerScore += newCard.value
     $('#player_cards').append('<br />' + newCard.name)
     if (playerScore === 21) {
-            $('#info').text(infoCards.switch);
+            $('#info').text(infoCards.win);
             $('#hit').prop("disabled", true)
             $('#stand').prop("disabled", true)
+            setTimeout(rematch_info, 3000);
     }
     $('#player_total').text(`Current Score: ` + playerScore);
 }
